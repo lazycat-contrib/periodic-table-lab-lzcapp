@@ -15,7 +15,7 @@ update:
 build:
   toolchains:
     - kind: docker
-  run_buildscript: false
+  run_buildscript: true
 
 stores:
   private:
