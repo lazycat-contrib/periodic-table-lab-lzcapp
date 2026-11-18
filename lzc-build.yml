@@ -1,9 +1,18 @@
 manifest: ./lzc-manifest.yml
 pkgout: ./
 icon: ./icon.png
-# 源码构建：上游 periodic-table-lab 未发布 docker 镜像，构建时内嵌上游源码快照。
-# build/source.tar.gz 为上游 commit c3cfbe2b4c 的 tarball 快照（记录于 build/SOURCE_SHA）。
-# 说明：不在容器内 git clone —— 盒子构建网络不保证可达 github.com。
+# 源码构建：上游 periodic-table-lab 未发布 docker 镜像。
+# buildscript 在构建前下载上游 commit 快照 tarball 并校验 SHA256（记录于 build/SOURCE_SHA）。
+# 说明：不在容器内 git clone —— 盒子构建网络不保证可达 github.com，只做一次性受校验的 tarball 下载。
+buildscript: |
+  #!/bin/bash
+  set -euo pipefail
+  cd "$(dirname "$0")"
+  if [ ! -f build/source.tar.gz ]; then
+    curl -fsSL --retry 3 -o build/source.tar.gz \
+      "https://github.com/brin666/periodic-table-lab/tarball/c3cfbe2b4c"
+  fi
+  echo "b76de4abc97414febe6a98da97037849687135686e4a88e1a6df7910187b8499  build/source.tar.gz" | sha256sum -c -
 images:
   atlas:
     dockerfile: ./build/Dockerfile
