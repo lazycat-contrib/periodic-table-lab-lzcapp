@@ -1,0 +1,27 @@
+version: 1
+
+project:
+  root: .
+  build_config: lzc-build.yml
+  package_file: package.yml
+  output: .lazycat-build/atlas.lpk
+  target_arch: amd64
+
+update:
+  strategy: publish
+  version_source:
+    type: git
+
+build:
+  toolchains:
+    - kind: docker
+  run_buildscript: false
+
+stores:
+  private:
+    enabled: true
+    skip_if_version_exists: true
+    name: 元素之间
+    summary: "元素之间（Element Atlas）懒猫微服打包：中英双语互动元素周期表，118 元素 + 25 个知识导图 + 化合物发现 + 核素索引。"
+  official:
+    enabled: false

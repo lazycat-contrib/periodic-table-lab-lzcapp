@@ -1,0 +1,4 @@
+.lzc-cli-cache/
+.lazycat-build/
+*.lpk
+build/source.tar.gz

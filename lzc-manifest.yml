@@ -1,0 +1,39 @@
+application:
+  subdomain: element-atlas
+  multi_instance: false
+  public_path:
+    - /
+  upstreams:
+    - location: /
+      backend: http://atlas:8080/
+
+services:
+  atlas:
+    # 源码构建应用：上游未发布镜像，lzc-build.yml 用 Dockerfile 从上游源码构建并内嵌 LPK
+    # 上游: https://github.com/brin666/periodic-table-lab (仓库未声明开源许可证，仅打包分发)
+    image: embed:atlas
+    environment:
+      - TZ=Asia/Shanghai
+    healthcheck:
+      test:
+        - CMD-SHELL
+        - wget -q -O /dev/null http://127.0.0.1:8080/ || exit 1
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
+
+usage: |
+  元素之间（Element Atlas）是一款面向初高中学习与自主探索的中英双语化学网站。
+
+  - 浏览完整的 118 元素周期表，查看元素资料、电子层和关联物质。
+  - 阅读 25 个重点元素知识导图（228 张知识卡）并查看卡片来源。
+  - 在收录的无机化合物集合中按元素发现化合物。
+  - 查看 NUBASE2020 基态核素索引（3555 条）。
+  - 页面右上角可切换中文/英文；首次访问默认中文。
+
+  【说明】
+  - 纯静态应用，无账号体系，数据全部内置于应用中。
+  - 上游仓库未声明开源许可证：https://github.com/brin666/periodic-table-lab
+    （上游明确声明仓库内容不授予通用复用许可，本项目仅作打包分发）。
+  - 本应用由上游源码快照构建（commit c3cfbe2），暂不自动跟随上游更新。

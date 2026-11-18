@@ -1,0 +1,10 @@
+manifest: ./lzc-manifest.yml
+pkgout: ./
+icon: ./icon.png
+# 源码构建：上游 periodic-table-lab 未发布 docker 镜像，构建时内嵌上游源码快照。
+# build/source.tar.gz 为上游 commit c3cfbe2b4c 的 tarball 快照（记录于 build/SOURCE_SHA）。
+# 说明：不在容器内 git clone —— 盒子构建网络不保证可达 github.com。
+images:
+  atlas:
+    dockerfile: ./build/Dockerfile
+    context: build

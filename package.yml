@@ -1,0 +1,20 @@
+package: community.lazycat.app.element-atlas
+version: 1.0.0
+name: Element Atlas
+description: "元素之间（Element Atlas）：中英双语互动元素周期表，含 118 元素资料、25 个重点元素知识导图（228 张知识卡）、无机化合物发现与 NUBASE2020 核素索引，面向初高中化学学习。"
+min_os_version: 1.5.0
+homepage: https://github.com/brin666/periodic-table-lab
+author: brin666
+license: Proprietary
+permissions:
+  required:
+    - net.internet
+locales:
+  zh:
+    name: 元素之间
+    description: "中英双语互动元素周期表：118 元素资料、25 个重点元素知识导图、无机化合物发现与 NUBASE2020 核素索引，面向初高中化学学习。"
+  zh_CN:
+    name: 元素之间
+  en:
+    name: Element Atlas
+    description: "Bilingual interactive periodic table with chemistry mind maps, isotope exploration and inorganic compound discovery."
